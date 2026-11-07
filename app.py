@@ -3,10 +3,13 @@ import re
 import secrets
 import threading
 from datetime import date
-from fastapi import FastAPI, Header, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 
 app = FastAPI(title='TradingAgents Research Bridge', version='0.1.0')
+security = HTTPBearer()
+
 _lock = threading.Lock()
 
 class ResearchRequest(BaseModel):
